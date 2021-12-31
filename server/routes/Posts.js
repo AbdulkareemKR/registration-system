@@ -3,7 +3,7 @@ const router = express.Router();
 const { Posts } = require("../models");
 
 router.get("/", async (req, res) => {
-  const listOfPosts = Posts.findAll();
+  const listOfPosts = await Posts.findAll();
   res.send(listOfPosts);
 });
 
