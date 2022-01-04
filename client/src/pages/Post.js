@@ -29,15 +29,19 @@ function Post() {
         },
         {
           headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
+            accessToken: localStorage.getItem("accessToken"),
           },
         }
       )
       .then((response) => {
         if (response.data.error) {
           alert("You are not logged in");
+          console.log(response.data.error);
         } else {
-          const commentToAdd = { commentBody: newComment };
+          const commentToAdd = {
+            commentBody: newComment,
+            username: response.data.username,
+          };
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
@@ -71,6 +75,7 @@ function Post() {
             return (
               <div key={key} className="comment">
                 {comment.commentBody}
+                Username: {comment.username}
               </div>
             );
           })}
